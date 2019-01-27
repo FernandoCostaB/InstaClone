@@ -5,12 +5,12 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   selector: 'app-acesso',
   templateUrl: './acesso.component.html',
   styleUrls: ['./acesso.component.css'],
-  animations:[
-    trigger('animacaoBanner',[
-      state('criado',style({
+  animations: [
+    trigger('animacaoBanner', [
+      state('criado', style({
         opacity: 1
       })),
-      transition('void => criado',[
+      transition('void => criado', [
         style({
           opacity: 0,
           transform: 'translate(-30px, 0px)'
@@ -18,11 +18,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         animate('500ms 0s ease-in-out')
       ])
     ]),
-    trigger('animacaoPainel',[
-      state('criado',style({
+    trigger('animacaoPainel', [
+      state('criado', style({
         opacity: 1
       })),
-      transition('void => criado',[
+      transition('void => criado', [
         style({
           opacity: 0,
           transform: 'translate(30px, 0px)'
@@ -34,14 +34,17 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class AcessoComponent implements OnInit {
 
-  public estadoBanner: string = 'criado';
-  public estadoPainel: string = 'criado';
+  public estadoBanner = 'criado';
+  public estadoPainel = 'criado';
 
-  public cadastro: boolean = false;
+  public cadastro = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  public exibirPainel($event: string): void {
+   this.cadastro = $event === 'cadastro' ? true : false;
+  }
 }
