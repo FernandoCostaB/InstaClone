@@ -16,13 +16,12 @@ import { Imagem } from './imagem.model';
         opacity: 1
       })),
       transition('escondido <=> visivel', animate('1s ease-in'))
-      
     ])
   ]
 })
 export class BannerComponent implements OnInit {
 
-  public estado: string = 'escondido';
+  public estados = 'escondido';
 
   public imagens: Imagem[] = [
     { estado: 'visivel', url: '/assets/banner-acesso/img_1.png'},
@@ -36,20 +35,20 @@ export class BannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    setTimeout(() => this.logicaRotacao(), 2500)
+    setTimeout(() => this.logicaRotacao(), 2500);
   }
 
   public logicaRotacao(): void {
     let aux: number ;
-    for(let i:number = 0; i <= 4 ; i++){
-      if(this.imagens[i].estado === 'visivel'){
+    for (let i = 0; i <= 4 ; i++) {
+      if (this.imagens[i].estado === 'visivel') {
         this.imagens[i].estado = 'escondido';
         aux = i === 4 ? 0 : i + 1;
         break;
       }
     }
-    this.imagens[aux].estado = "visivel";
-    setTimeout(() => this.logicaRotacao(), 2000)
+    this.imagens[aux].estado = 'visivel';
+    setTimeout(() => this.logicaRotacao(), 2000);
   }
 
 
