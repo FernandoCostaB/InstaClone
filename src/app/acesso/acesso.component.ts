@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-acesso',
@@ -13,7 +13,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       transition('void => criado', [
         style({
           opacity: 0,
-          transform: 'translate(-30px, 0px)'
+          transform: 'translate(-50px, 0px)'
         }),
         animate('500ms 0s ease-in-out')
       ])
@@ -25,9 +25,17 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       transition('void => criado', [
         style({
           opacity: 0,
-          transform: 'translate(30px, 0px)'
+          transform: 'translate(50px, 0px)'
         }),
-        animate('500ms 0s ease-in-out')
+        animate('1.5s 0s ease-in-out', keyframes([
+          style({ offset: 0.15, opacity: 1, transform: 'translateX(0px)' }),
+          style({ offset: 0.86, opacity: 1, transform: 'translateX(0px)' }),
+          style({ offset: 0.88, opacity: 1, transform: 'translatey(-10px)' }),
+          style({ offset: 0.90, opacity: 1, transform: 'translatey(10px)' }),
+          style({ offset: 0.94, opacity: 1, transform: 'translatey(-10px)' }),
+          style({ offset: 0.98, opacity: 1, transform: 'translatey(10px)' }),
+          style({ offset: 1, opacity: 1, transform: 'translatey(0px)' })
+        ]))
       ])
     ])
   ]
@@ -45,6 +53,6 @@ export class AcessoComponent implements OnInit {
   }
 
   public exibirPainel($event: string): void {
-   this.cadastro = $event === 'cadastro' ? true : false;
+    this.cadastro = $event === 'cadastro' ? true : false;
   }
 }
