@@ -2,10 +2,10 @@ import { Usuario } from './acesso/usuario.model';
 import * as firebase from 'firebase';
 
 export class Auth {
-    public cadastrarUsuario(usuario: Usuario): void {
+    public cadastrarUsuario(usuario: Usuario): Promise<any> {
         console.log('chegamos no servico ' + usuario);
 
-        firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
+     return   firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
         .then((response: any) => {
             delete usuario.senha;
            firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`).set(usuario);
