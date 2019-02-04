@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class Auth {
+  
 
 
     public token_id: string;
@@ -31,6 +32,7 @@ export class Auth {
                 firebase.auth().currentUser.getIdToken()
                     .then((idToken: string) => {
                         this.token_id = idToken;
+                        localStorage.setItem('idToken', idToken);
                         this.router.navigate(['/home']);
                     });
             })
@@ -40,6 +42,19 @@ export class Auth {
     }
 
     public authenticated(): boolean {
+
+        if(this.token_id === undefined && localStorage.getItem('idToken') != null){
+            this.token_id = localStorage.getItem('idToken');
+        }
+
         return this.token_id !== undefined;
     }
+
+    logout(): any {
+        firebase.auth().signOut().then(() => {
+            localStorage.removeItem('idToken');
+            this.token_id = undefined;
+            this.router.navigate(['/']);
+        });
+      }
 }
