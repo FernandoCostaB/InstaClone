@@ -2,9 +2,11 @@ import { Usuario } from './acesso/usuario.model';
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 @Injectable()
 export class Auth {
+
 
     public token_id: string;
 
@@ -35,5 +37,9 @@ export class Auth {
             .catch((error: Error) => {
                 console.log(error);
             });
+    }
+
+    public authenticated(): boolean {
+        return this.token_id !== undefined;
     }
 }
