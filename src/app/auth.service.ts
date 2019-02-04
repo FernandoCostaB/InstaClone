@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class Auth {
-  
+
 
 
     public token_id: string;
@@ -43,10 +43,13 @@ export class Auth {
 
     public authenticated(): boolean {
 
-        if(this.token_id === undefined && localStorage.getItem('idToken') != null){
+        if (this.token_id === undefined && localStorage.getItem('idToken') != null) {
             this.token_id = localStorage.getItem('idToken');
         }
 
+        if (this.token_id === undefined) {
+            this.router.navigate(['/']);
+        }
         return this.token_id !== undefined;
     }
 
