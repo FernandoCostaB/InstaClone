@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { AuthGuard } from './auuth-guard.service';
 import { PostComponent } from './home/post/post.component';
+import { DataBase } from './database.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { PostComponent } from './home/post/post.component';
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth, AuthGuard],
+  providers: [Auth, AuthGuard, DataBase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
