@@ -14,9 +14,10 @@ import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
-import { AuthGuard } from './auuth-guard.service';
+import { AuthGuard } from './auth-guard.service';
 import { PostComponent } from './home/post/post.component';
 import { DataBase } from './database.service';
+import { Progresso } from './progresso.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { DataBase } from './database.service';
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [Auth, AuthGuard, DataBase],
+  providers: [Auth, AuthGuard, DataBase, Progresso],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

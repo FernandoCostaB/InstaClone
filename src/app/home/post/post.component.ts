@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataBase } from 'src/app/database.service';
 import * as firebase from 'firebase';
+import { Progresso } from 'src/app/progresso.service';
 
 
 
@@ -20,7 +21,7 @@ export class PostComponent implements OnInit {
   });
 
 
-  constructor(private database: DataBase) { }
+  constructor(private database: DataBase, private progresso: Progresso) { }
 
   ngOnInit() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -34,6 +35,8 @@ export class PostComponent implements OnInit {
       titulo: this.formulario.value.titulo,
       imagem: this.imagem[0]
    });
+   console.log(this.progresso.estado);
+   console.log(this.progresso.status);
   }
 
   public upload(event: Event): void {
