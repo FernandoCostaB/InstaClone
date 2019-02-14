@@ -25,7 +25,7 @@ export class DataBase {
                 // console.log(error);
             },
             () => {
-                this.progresso.status = 'concluído';
+                this.progresso.status = 'concluido';
                 // console.log('upload concluído');
             }
             );
