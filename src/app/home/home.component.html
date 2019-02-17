@@ -10,6 +10,6 @@
 
 <br /><br /><br />
 <div class="container">
-  <app-publicacoes></app-publicacoes>
-  <app-post></app-post>
+  <app-publicacoes #publicacoes ></app-publicacoes>
+  <app-post (atualizarFeed)="atualizarFeed()"></app-post>
 </div>

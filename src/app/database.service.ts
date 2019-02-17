@@ -51,7 +51,6 @@ export class DataBase {
                    firebase.storage().ref().child(`imagens/${childSnapshot.key}`)
                    .getDownloadURL()
                    .then((url: string) => {
-                       console.log(url);
                        publicacao.url_imagem = url;
                        // recuperando o nome do usuario
                        firebase.database().ref(`usuario_detalhe/${btoa(email)}`)
