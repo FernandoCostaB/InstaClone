@@ -1,4 +1,4 @@
-export class Progresso{
+export class Progresso {
     public status: string;
     public estado: any;
 }
