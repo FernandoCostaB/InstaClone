@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Progresso } from './progresso.service';
 
+
 @Injectable()
 export class DataBase {
 
@@ -25,7 +26,7 @@ export class DataBase {
                         this.progresso.estado = snapshot;
                         //  console.log('captura feita no serviço da base de dados: ', snapshot);
                     },
-                    (error: any) => {
+                    (_error: any) => {
                         this.progresso.status = 'erro';
                     },
                     () => {
@@ -35,12 +36,39 @@ export class DataBase {
             });
     }
 
-    public consultarPublicacoes(email: string): any {
-         firebase.database().ref(`posts/${btoa(email)}`)
-         .once('value')
-         .then((snapshot: any) => {
-             console.log(snapshot.val());
-         });
+    public consultarPublicacoes(email: string): Promise <any> {
+
+        return new Promise ((resolve, reject) => {
+            firebase.database().ref(`posts/${btoa(email)}`)
+            .once('value')
+            .then((snapshot: any) => {
+               // lista de publicações
+               const publicacoes: Array<any> = [];
+
+                snapshot.forEach((childSnapshot: any) => {
+                    const publicacao = childSnapshot.val();
+                   //  recuperando a imagem do post
+                   firebase.storage().ref().child(`imagens/${childSnapshot.key}`)
+                   .getDownloadURL()
+                   .then((url: string) => {
+                       console.log(url);
+                       publicacao.url_imagem = url;
+                       // recuperando o nome do usuario
+                       firebase.database().ref(`usuario_detalhe/${btoa(email)}`)
+                       .once('value')
+                       .then((snapshot: any) => {
+                           publicacao.nome_usuario = snapshot.val().nome_usuario;
+                           publicacoes.push(publicacao);
+                       });
+
+                   });
+                });
+              resolve(publicacoes);
+            });
+        });
+
+
+
     }
 
 }
