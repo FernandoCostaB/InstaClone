@@ -50,7 +50,7 @@ export class PostComponent implements OnInit {
    continua.next(true);
 
    countUpload.pipe(takeUntil(continua)).subscribe(() => {
-  
+
     this.progressoPublicacao = 'andamento';
     this.porcentagemUpload = Math.round(( this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes ) * 100);
 
